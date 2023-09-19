@@ -1,7 +1,10 @@
 import {Router} from "express"; 
-import { getSongs} from "../controllers/songs.controller.js"; 
+import { getSongs, getSong, createSong} from "../controllers/songs.controller.js"; 
 
-export const songRouter = Router()
+export const songRoutes = Router()
 
-songRouter.get("/", getSongs)
+songRoutes
+    .get("/", getSongs)
+    .get("/:id", getSong)
+    .post("/", createSong)
 
