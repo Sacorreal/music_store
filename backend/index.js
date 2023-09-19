@@ -1,7 +1,7 @@
 import express from "express"; 
 import cors from "cors"; 
 import "dotenv/config";
-import {songRouter } from "./src/routes/song.router.js"; 
+import {songRouter } from "./src/routes/song.routes.js"; 
 import {unknownEndpoint } from "./src/middleware/unknownEndpoint.js"
 import { errorHandler } from "./src/middleware/errorHandler.js";
 
@@ -19,6 +19,7 @@ app.use(unknownEndpoint)
 
 //errors 
 app.use(errorHandler)
+
 
 //run server
 async function main(){
