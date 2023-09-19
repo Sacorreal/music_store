@@ -20,7 +20,7 @@ const createSong = async (req, res, next) =>{
         storage,
         limit:{
             fields: 1,
-            fileSize: 9000000,
+            fileSize: 19000000,
             files: 1,
             parts: 2
         }

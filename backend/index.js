@@ -5,6 +5,7 @@ import morgan from "morgan";
 import {songRoutes } from "./src/routes/song.routes.js"; 
 import {unknownEndpoint } from "./src/middleware/unknownEndpoint.js"
 import { errorHandler } from "./src/middleware/errorHandler.js";
+import { dbConnection } from "./src/db/db.js";
 
 const app = express(); 
 const PORT = process.env.PORT
@@ -26,6 +27,10 @@ app.use(errorHandler)
 
 //run server
 async function main(){
+
+    //db connection
+    await dbConnection(); 
+
     app.listen(PORT, ()=>{
         console.log(`🚀 Server listen in http://localhost:${PORT}`)
     })
