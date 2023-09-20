@@ -7,6 +7,7 @@ import {unknownEndpoint } from "./src/middleware/unknownEndpoint.js"
 import { errorHandler } from "./src/middleware/errorHandler.js";
 import { dbConnection } from "./src/db/db.js";
 
+
 const app = express(); 
 const PORT = process.env.PORT
 
@@ -35,6 +36,7 @@ async function main(){
         console.log(`🚀 Server listen in http://localhost:${PORT}`)
     })
 }
+
 
 main()
 
