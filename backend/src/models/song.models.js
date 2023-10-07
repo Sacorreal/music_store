@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'; 
+import mongoose from 'mongoose';
 
 const songSchema = new mongoose.Schema({
     name: String, 
@@ -7,9 +7,10 @@ const songSchema = new mongoose.Schema({
     url: String,
     price: {type: Number, required: true}, 
     visible: { type: Boolean, default: true },
-    create_at: { type: Date, default: Date.now },
-    auth: [{type: mongoose.Schema.Types.ObjectId, ref: 'Composer'}, {strict: true}] // como se especifica en la relacion? 
-}) 
+    auth: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}, {strict: true}]},     
+    { timestamps: true }
+
+) 
 
 export const Song = mongoose.model(
     "Song",

@@ -1,11 +1,13 @@
-import express from "express"; 
-import cors from "cors"; 
+import cors from "cors";
 import "dotenv/config";
+import express from "express";
 import morgan from "morgan";
-import {songRoutes } from "./src/routes/song.routes.js"; 
-import {unknownEndpoint } from "./src/middleware/unknownEndpoint.js"
-import { errorHandler } from "./src/middleware/errorHandler.js";
 import { dbConnection } from "./src/db/db.js";
+import { errorHandler } from "./src/middleware/errorHandler.js";
+import { unknownEndpoint } from "./src/middleware/unknownEndpoint.js";
+import { authRouter } from "./src/routes/auth.routes.js";
+import { songRoutes } from "./src/routes/song.routes.js";
+import { userRoutes } from "./src/routes/user.routes.js";
 
 
 const app = express(); 
@@ -18,6 +20,10 @@ app.use(cors());
 
 //routes
 app.use("/api/v1/songs", songRoutes)
+app.use("/api/v1/user", userRoutes)
+app.use("/api/v1/auth", authRouter)
+
+app.use("/api/v1/welcome", (req,res)=>res.status(200).json({message:"Welcome to my api rest"}))
 
 //endpoints unknown
 app.use(unknownEndpoint)

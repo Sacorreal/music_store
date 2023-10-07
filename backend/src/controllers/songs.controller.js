@@ -27,7 +27,7 @@ const getSong = async (request, response, next) => {
 
  };
 
-//como validar los datos requeridos segun el modelo?
+
 const createSong = async (request, response, next) => {
     try {
       const dataSong =  request.body;
@@ -45,7 +45,7 @@ const updateSong = async (request, response, next) => {
     try {
     const id = request.params.id
     const songNewProps = request.body; 
-    const updatedSong = await Song.findByIdAndUpdate(id, songNewProps, {new: true,
+    await Song.findOneAndUpdate(id, songNewProps, {new: true,
     }).exec();
     } catch (error) {
         next(error)
