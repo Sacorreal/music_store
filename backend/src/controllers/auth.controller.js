@@ -1,4 +1,5 @@
 import { User } from "../models/user.models.js";
+import { generateToken } from "../utils/token.js";
 
 const signIn = async (req, res, next) =>{
   const {email, password } = req.body; 
@@ -49,7 +50,14 @@ const signUp = async (req, res, next) => {
 
         newUser.password = await newUser.encryptPassword(password)
         await User.create(newUser)
-        res.status(201).json({message:"User created"})
+        const payload = {id:newUser._id, role:newUser.role}; 
+        const token = generateToken(payload)
+        
+        res.status(201).json({
+          message:"User created",
+          token
+        
+        })
     
 
       } catch (error) {

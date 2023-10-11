@@ -16,6 +16,7 @@ const PORT = process.env.PORT
 // middlewares
 app.use(morgan('dev')); // leer las peticiones
 app.use(express.json());
+app.use(express.urlencoded({extended:false})); //recibir peticiones desde un form. 
 app.use(cors());
 
 //routes

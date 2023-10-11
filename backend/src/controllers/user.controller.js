@@ -1,9 +1,9 @@
 import { User } from "../models/user.models.js";
 
-const getComposer = async (req, res, next) => {
+const getComposers = async (req, res, next) => {
     try {
-        const composers = await User.find({role:"composer"}); 
-        res.status(200).json(composers) //todo: omitir el password en la respuesta
+        const composers = await User.find({role:"composer"}, {password: 0}); 
+        res.status(200).json(composers)
         
     } catch (error) {
         next(error);
@@ -38,5 +38,5 @@ const deleteUser = async (request, response, next) => {
    }
 }
 
-export { deleteUser, getComposer, updateUser };
+export { deleteUser, getComposers, updateUser };
 
