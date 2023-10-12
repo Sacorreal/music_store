@@ -1,8 +1,8 @@
-import {Song} from "../models/song.models.js";
+import { Song } from "../models/song.models.js";
 
 const getSongs = async (req, res, next) => {
     try {
-        const songs = await Song.find().populate('auth'); 
+        const songs = await Song.find(); 
         res.status(200).json(songs)
         
     } catch (error) {
@@ -30,7 +30,7 @@ const getSong = async (request, response, next) => {
 
 const createSong = async (request, response, next) => {
     try {
-      const dataSong =  request.body;
+      const dataSong =  request.body;      
       const songCreate = await Song.create(dataSong)
       response.status(201).json({
         message: "song created",
@@ -65,4 +65,5 @@ const deleteSong = async (request, response, next) => {
    }
 }
 
-export { getSongs, getSong, createSong, updateSong, deleteSong };
+export { createSong, deleteSong, getSong, getSongs, updateSong };
+

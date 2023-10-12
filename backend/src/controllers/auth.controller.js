@@ -5,6 +5,7 @@ const signIn = async (req, res, next) =>{
   const {email, password } = req.body; 
   try {
     const foundUser = await User.findOne({email}); 
+  
     if(!foundUser){
       return res.status(404).json({error: "User not exist"})
     }
@@ -15,7 +16,8 @@ const signIn = async (req, res, next) =>{
         error:"Credentials incorrect"
       })
     }
-    res.status(200).json({ok:true, message: "Welcome"})
+    const token = generateToken(foundUser); 
+    res.status(200).json({ok:true, message: "Welcome", token})
 
     
   } catch (error) {
@@ -49,14 +51,11 @@ const signUp = async (req, res, next) => {
         const newUser = new User(UserProps)
 
         newUser.password = await newUser.encryptPassword(password)
-        await User.create(newUser)
-        const payload = {id:newUser._id, role:newUser.role}; 
-        const token = generateToken(payload)
-        
+        await User.create(newUser);        
+        const token = generateToken(newUser);              
         res.status(201).json({
           message:"User created",
-          token
-        
+          token        
         })
     
 

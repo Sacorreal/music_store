@@ -3,7 +3,7 @@ import Joi from 'joi';
 const createSongValidator = (request, response, next) => {
     const {name } = request.body;
     const schema = Joi.object({
-        name: Joi.string().min(2).max(10)
+        name: Joi.string().min(2).max(100)
     })
 
     const value = schema.validate({
@@ -20,7 +20,7 @@ const createSongValidator = (request, response, next) => {
 const updateUserValidator = (request, response, next) => {
     try {
         const {role} = request.body; 
-        if(role == "composer" || role == "singer"){
+        if(role == "composer" || role == "singer"){             
             next()          
 
         } else{

@@ -2,7 +2,7 @@ import { User } from "../models/user.models.js";
 
 const getComposers = async (req, res, next) => {
     try {
-        const composers = await User.find({role:"composer"}, {password: 0}); 
+        const composers = await User.find({role:"composer"}, {password: 0}).populate("tracks"); 
         res.status(200).json(composers)
         
     } catch (error) {
@@ -38,5 +38,11 @@ const deleteUser = async (request, response, next) => {
    }
 }
 
-export { deleteUser, getComposers, updateUser };
+const getComposer = async (req, res, next) => {
+    const id = req.params.id; 
+    const composer = await User.findById(id, {password: 0}).populate('tracks').exec();    
+    res.status(200).json(composer)
+}
+
+export { deleteUser, getComposer, getComposers, updateUser };
 

@@ -1,6 +1,6 @@
-import {Router} from "express"; 
-import { createSongValidator} from  "../middleware/validationData.js"
-import { getSongs, getSong, createSong, updateSong, deleteSong} from "../controllers/songs.controller.js"; 
+import { Router } from "express";
+import { createSong, deleteSong, getSong, getSongs, updateSong } from "../controllers/songs.controller.js";
+import { createSongValidator } from "../middleware/validationData.js";
 
 
 export const songRoutes = Router()

@@ -5,9 +5,11 @@ const songSchema = new mongoose.Schema({
     gender: String, 
     duration: String, 
     url: String,
+    avatar: String,
     price: {type: Number, required: true}, 
     visible: { type: Boolean, default: true },
-    auth: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}, {strict: true}]},     
+    auth: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+},     
     { timestamps: true }
 
 ) 
