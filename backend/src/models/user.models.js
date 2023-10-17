@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required: true},
     avatar: String,
     role: {type: String, enum: ["composer", "singer", "admin", "user"], default: "user"},
-    tracks: [{type: mongoose.Schema.Types.ObjectId, ref: 'Song'}]    
+    tracks: [{type: mongoose.Schema.Types.ObjectId, ref: 'Song'}], 
+    favoriteSongs:[{type: mongoose.Schema.Types.ObjectId, ref: 'Song'}]
 }, 
 
 { timestamps: true }) 

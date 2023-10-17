@@ -11,6 +11,36 @@ const getSongs = async (req, res, next) => {
     }
 };
 
+const getFavoriteSongs = async (req, res, next) =>{
+    try {
+        const idUser = req.userId;    
+        //todo: omitir campos en la respuesta    
+        const userFound = await User.findById(idUser, {password: 0}).populate('favoriteSongs').exec();
+        res.status(200).json({favoriteSongs: userFound.favoriteSongs})
+    } catch (error) {
+        console.log(error)
+        next(error)
+        
+    }
+}
+
+const saveFavoriteSong = async (req, res, next) =>{
+    try {
+        const idUser = req.userId;
+        const songFav = req.params.id
+        const userFound = await User.findById(idUser)
+        userFound.favoriteSongs = [...userFound.favoriteSongs, songFav];
+        userFound.save() 
+        res.status(201).end(); 
+
+        
+    } catch (error) {
+        console.log(error)
+        next(error)
+        
+    }
+}
+
 const getSong = async (request, response, next) => {
     try {
         const id = req.params.id; 
@@ -74,5 +104,5 @@ const deleteSong = async (request, response, next) => {
    }
 }
 
-export { createSong, deleteSong, getSong, getSongs, updateSong };
+export { createSong, deleteSong, getFavoriteSongs, getSong, getSongs, saveFavoriteSong, updateSong };
 
