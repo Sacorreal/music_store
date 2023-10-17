@@ -3,7 +3,7 @@ import { User } from "../models/user.models.js";
 
 const getSongs = async (req, res, next) => {
     try {
-        const songs = await Song.find().populate("auth"); 
+        const songs = await Song.find(); 
         res.status(200).json(songs)
         
     } catch (error) {
@@ -32,9 +32,10 @@ const getSong = async (request, response, next) => {
 const createSong = async (request, response, next) => {
     try {
       const idUser = request.userId;
-      const dataSong =  request.body;      
+      const dataSong =  request.body;            
       const songCreate = await Song.create(dataSong)      
       const userFound = await User.findById(idUser)
+      //todo: agregar más de una cancion cuando se pasa por body. 
       userFound.tracks = [...userFound.tracks,songCreate._id];
       userFound.save() 
       response.status(201).json({
