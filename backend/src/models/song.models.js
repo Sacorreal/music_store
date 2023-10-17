@@ -2,13 +2,12 @@ import mongoose from 'mongoose';
 
 const songSchema = new mongoose.Schema({
     name: String, 
-    gender: String, 
+    genre: String, 
     duration: String, 
     url: String,
     avatar: String,
     price: {type: Number, required: true}, 
-    visible: { type: Boolean, default: true },
-    auth: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+    visible: { type: Boolean, default: true }
 },     
     { timestamps: true }
 

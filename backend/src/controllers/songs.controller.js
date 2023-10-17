@@ -1,8 +1,9 @@
 import { Song } from "../models/song.models.js";
+import { User } from "../models/user.models.js";
 
 const getSongs = async (req, res, next) => {
     try {
-        const songs = await Song.find(); 
+        const songs = await Song.find().populate("auth"); 
         res.status(200).json(songs)
         
     } catch (error) {
@@ -30,13 +31,20 @@ const getSong = async (request, response, next) => {
 
 const createSong = async (request, response, next) => {
     try {
+      const idUser = request.userId;
       const dataSong =  request.body;      
-      const songCreate = await Song.create(dataSong)
+      const songCreate = await Song.create(dataSong)      
+      const userFound = await User.findById(idUser)
+      userFound.tracks = [...userFound.tracks,songCreate._id];
+      userFound.save() 
       response.status(201).json({
         message: "song created",
-        songId: songCreate._id}); 
+        songId: songCreate._id,       
+        
+    }); 
     
     } catch (error) {
+        console.log(error)
         next(error)
     }
 };
