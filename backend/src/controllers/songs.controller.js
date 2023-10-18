@@ -13,12 +13,22 @@ const getSongs = async (req, res, next) => {
 
 const getFavoriteSongs = async (req, res, next) =>{
     try {
-        const idUser = req.userId;    
-        //todo: omitir campos en la respuesta    
-        const userFound = await User.findById(idUser, {password: 0}).populate('favoriteSongs').exec();
+        const idUser = req.userId;            
+        const userFound = await User.findById(idUser).populate('favoriteSongs').exec();
         res.status(200).json({favoriteSongs: userFound.favoriteSongs})
     } catch (error) {
         console.log(error)
+        next(error)
+        
+    }
+}
+
+const genreList = async (req, res, next) => {
+    try {
+    const genre = req.params.genre
+    const listGenre = await Song.find({genre : genre})
+    res.status(200).json({list:listGenre})        
+    } catch (error) {
         next(error)
         
     }
@@ -104,5 +114,12 @@ const deleteSong = async (request, response, next) => {
    }
 }
 
-export { createSong, deleteSong, getFavoriteSongs, getSong, getSongs, saveFavoriteSong, updateSong };
+export {
+    createSong,
+    deleteSong, genreList, getFavoriteSongs,
+    getSong,
+    getSongs,
+    saveFavoriteSong,
+    updateSong
+};
 
