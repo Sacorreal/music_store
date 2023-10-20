@@ -1,6 +1,31 @@
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { Login } from "../utils/loginPost.js";
 
 function Home() {
+  const { register, handleSubmit } = useForm();
+  
+  const onSubmit = async (data) => {
+    const resLogin = await Login(data); 
+    console.log(resLogin)
+    try {
+      if(!resLogin.ok){
+        alert("Credenciales invalidas")
+        return
+      }
+      else{
+        //guardar token en localStorage
+        localStorage.setItem("token", resLogin.token)
+        location.href = "/list"      
+  
+      }
+      
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }
+
   return (
     <section className="vh-100" style={{ backgroundColor: "#0000" }}>
       <div className="container py-5 h-100">
@@ -18,7 +43,7 @@ function Home() {
                 </div>
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
                   <div className="card-body p-4 p-lg-5 text-black">
-                    <form>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                       <h5
                         className="fw-normal mb-3 pb-3"
                         style={{ letterSpacing: 1 }}
@@ -28,18 +53,20 @@ function Home() {
                       <div className="form-outline mb-4">
                         <input
                           type="email"
-                          id="email"
+                          name="email"
                           className="form-control form-control-lg"
+                          {...register("email")}
                         />
-                        <label className="form-label" htmlFor="email">
+                        <label className="form-label" >
                           Email
                         </label>
                       </div>
                       <div className="form-outline mb-4">
                         <input
                           type="password"
-                          id="form2Example27"
+                          name="password"
                           className="form-control form-control-lg"
+                          {...register("password")}
                         />
                         <label className="form-label" htmlFor="form2Example27">
                           Password
@@ -48,7 +75,7 @@ function Home() {
                       <div className="pt-1 mb-4">
                         <button
                           className="btn btn-dark btn-lg btn-block"
-                          type="button"
+                          type="submit"
                         >
                           Login
                         </button>
