@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react'
+import Song from './Song'
 
-function ListSongs(){
+function ListSongs() {
     const URL = "https://music-store-hnrr.onrender.com/api/v1/songs"
     const [songs, setSongs] = useState([])
 
-    useEffect(()=>{
-        async function getSongs(){
+    useEffect(() => {
+        async function getSongs() {
             const response = await fetch(URL)
             const data = await response.json()
             setSongs(data)
-            
+
         }
         getSongs()
     })
@@ -19,14 +20,26 @@ function ListSongs(){
 
 
     return (
-        <>
-            {songs.map((song)=>(
+        <div className='container'>
+            <div className='row'>
 
-                <h2>{song.name}</h2>
-            )
-            )}
-        
-        </>
+                {
+                    songs.map((song) => {
+                        return (
+                            <div className="col-md-4" key={song._id}>
+                                <Song song={song} />
+                            </div>
+                        )
+                    })
+                }
+
+
+            </div>
+
+        </div>
+
+
+
     )
 }
 
