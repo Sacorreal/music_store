@@ -10,7 +10,7 @@ function SignUp() {
     console.log(resLogin)
     try {
       if(!resLogin.ok){
-        alert("Credenciales invalidas")
+        alert("Ha ocurrido un error en tu registro")
         return
       }
       else{

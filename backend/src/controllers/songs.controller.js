@@ -80,6 +80,7 @@ const createSong = async (request, response, next) => {
       userFound.save() 
       response.status(201).json({
         message: "song created",
+        ok:true,
         songId: songCreate._id,       
         
     }); 

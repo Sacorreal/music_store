@@ -5,22 +5,17 @@ function Song(props) {
     <div className="card" style={{ width: "20rem" }}>
   <img src={song.cover} className="card-img-top" alt="..." />
   <div className="card-body">
-    <h5 className="card-title">{song.name}</h5>
+    <h5 className="card-title">{song.name} - {song.genre}</h5>
     <p className="card-text">
-     {song.time}
+     {song.duration}
     </p>
-    <ul>
-        Artista<li>{song.artist}</li>
-        <li>{song.album}</li>
-    </ul>
-    <audio src={song.url} type= "audio/mp3" controls >
 
-    </audio>
-   
+        Artista - {song.strArtist}<br/>
+        Album -{song.strAlbum}
+    
+    <audio className="card-text mt-3" src={song.url} type= "audio/mp3" controls >
 
-    <a href="#" className="btn btn-primary">
-      Escuchar
-    </a>
+    </audio>  
   </div>
 </div>
 

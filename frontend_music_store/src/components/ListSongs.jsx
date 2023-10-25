@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Navbar from "./Navbar"
 import Song from './Song'
 
 function ListSongs() {
@@ -17,6 +18,7 @@ function ListSongs() {
 
     return (
         <div className='container'>
+            <Navbar/>
             <div className='row'>
 
                 {

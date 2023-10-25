@@ -11,7 +11,7 @@ songRoutes
     .get("/myFavoriteSongs",verifyToken, getFavoriteSongs)
     .get("/genre",genreList)
     .get("/:id", getSong)    
-    .post("/", createSongValidator, verifyToken, createSong)
+    .post("/", createSongValidator,createSong)
     .post("/favoriteSong/:id",verifyToken, saveFavoriteSong)
     .patch("/:id", updateSong)
     .delete("/:id", deleteSong) 
