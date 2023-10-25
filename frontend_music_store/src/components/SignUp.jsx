@@ -1,6 +1,31 @@
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { SignUpPost } from "../utils/loginPost";
 
 function SignUp() {
+  const { register, handleSubmit } = useForm();
+  
+  const onSubmit = async (data) => {
+    const resLogin = await SignUpPost(data); 
+    console.log(resLogin)
+    try {
+      if(!resLogin.ok){
+        alert("Credenciales invalidas")
+        return
+      }
+      else{
+        //guardar token en localStorage
+        localStorage.setItem("token", resLogin.token)
+        location.href = "/list"      
+  
+      }
+      
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }
+  
   return (
     <section className="vh-100" style={{ backgroundColor: "#0000" }}>
       <div className="container py-5 h-100">
@@ -18,7 +43,7 @@ function SignUp() {
                 </div>
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
                   <div className="card-body p-4 p-lg-5 text-black">
-                    <form>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                       <h5
                         className="fw-normal mb-3 pb-3"
                         style={{ letterSpacing: 1 }}
@@ -30,6 +55,7 @@ function SignUp() {
                           type="email"
                           id="email"
                           className="form-control form-control-lg"
+                          {...register("email")}
                         />
                         <label className="form-label" htmlFor="email">
                           Email
@@ -37,9 +63,20 @@ function SignUp() {
                       </div>
                       <div className="form-outline mb-4">
                         <input
+                          type="text"
+                          className="form-control form-control-lg"
+                          {...register("name")}
+                        />
+                        <label className="form-label" htmlFor="email">
+                          Nombre
+                        </label>
+                      </div>
+                      <div className="form-outline mb-4">
+                        <input
                           type="password"
                           id="password"
                           className="form-control form-control-lg"
+                          {...register("name")}
                         />
                         <label className="form-label" htmlFor="password">
                           Password

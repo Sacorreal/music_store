@@ -55,6 +55,7 @@ const signUp = async (req, res, next) => {
         const token = generateToken(newUser);              
         res.status(201).json({
           message:"User created",
+          ok: true,
           token        
         })
     
