@@ -6,6 +6,7 @@ function CreateSong() {
     const { register, handleSubmit } = useForm(); 
 
     const onSubmit = async (data) => {
+        console.log(data)
         const resLogin = await fetchCreateSong(data);         
         try {
           if(!resLogin.ok){
